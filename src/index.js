@@ -8,6 +8,7 @@ import { Provider, connect } from './react-redux-6.0.1/index'
 class Counter extends Component {
   render() {
     const { value, onIncreaseClick } = this.props
+    console.log(this.props)
     return (
       <div>
         <span>{value}</span>
@@ -53,12 +54,18 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
+// function mergeProps(stateProps, dispatchProps, ownProps) {
+//   console.log('stateProps', stateProps);
+//   console.log('dispatchProps', dispatchProps);
+//   console.log('ownProps', ownProps);
+// }
+
 // Connected Component
-console.log(connect);
 const App = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Counter)
+
 
 ReactDOM.render(
   <Provider store={store}>

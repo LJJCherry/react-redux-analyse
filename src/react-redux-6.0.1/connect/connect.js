@@ -22,10 +22,18 @@ import defaultSelectorFactory from './selectorFactory'
   it receives new props or store state.
  */
 
+ /*
+   connect是对connectAdvanced的封装，它把它的arg变成了一个兼容的selectorFactory：
+      (dispatch, options) => (nextState, nextOwnProps) => nextFinalProps
+   每次实例化或者重新加载的时候，connect将它的args作为options传递给connectAdvanced, connectAdvanced又将它们传递selectorFactory
+   selectorFactory返回一个final props selector从入参mapStateToProps,mapStateToPropsFactories, mapDispatchToProps, mapDispatchToPropsFactories, mergeProps,
+   mergePropsFactories, and pure
+   每次Connect component接收到新的props和store state都会调用final props selector
+*/
 function match(arg, factories, name) {
-  // console.log()
   for (let i = factories.length - 1; i >= 0; i--) {
     const result = factories[i](arg)
+    console.log('result', result);
     if (result) return result
   }
 
@@ -64,19 +72,12 @@ export function createConnect({
       ...extraOptions
     } = {}
   ) {
-    const initMapStateToProps = match(
-      mapStateToProps,
-      mapStateToPropsFactories,
-      'mapStateToProps'
-    )
-    console.log('initMapStateToProps', initMapStateToProps);
-    const initMapDispatchToProps = match(
-      mapDispatchToProps,
-      mapDispatchToPropsFactories,
-      'mapDispatchToProps'
-    )
+    const initMapStateToProps = match(mapStateToProps, mapStateToPropsFactories, 'mapStateToProps')
+    const initMapDispatchToProps = match(mapDispatchToProps,mapDispatchToPropsFactories, 'mapDispatchToProps')
     const initMergeProps = match(mergeProps, mergePropsFactories, 'mergeProps')
-
+    // 选择器（selector）的作用就是计算mapStateToProps，mapDispatchToProps, ownProps（来自父组件的props）的结果，
+    // 并将结果传给子组件props。这就是为什么你在mapStateToProps等三个函数中写的结果，子组件可以通过this.props拿到。
+    // 选择器工厂函数（selectorFactory）作用就是创建selector
     return connectHOC(selectorFactory, {
       // used in error messages
       methodName: 'connect',
@@ -88,6 +89,7 @@ export function createConnect({
       shouldHandleStateChanges: Boolean(mapStateToProps),
 
       // passed through to selectorFactory
+      // selectorFactory的传参
       initMapStateToProps,
       initMapDispatchToProps,
       initMergeProps,

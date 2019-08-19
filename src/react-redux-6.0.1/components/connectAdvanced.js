@@ -106,8 +106,6 @@ export default function connectAdvanced(
 
     const displayName = getDisplayName(wrappedComponentName)
 
-    console.log('displayName', displayName);
-
     const selectorFactoryOptions = {
       ...connectOptions,
       getDisplayName,
@@ -184,7 +182,6 @@ export default function connectAdvanced(
           lastChildProps = childProps
           lastForwardRef = forwardRef
           lastComponent = WrappedComponent
-          console.log('childProps', childProps);
           lastChildElement = (
             <WrappedComponent {...childProps} ref={forwardRef} />
           )

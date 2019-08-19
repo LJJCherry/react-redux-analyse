@@ -12,7 +12,6 @@ class Provider extends Component {
       storeState: store.getState(),
       store
     }
-    console.log('what');
   }
 
   componentDidMount() {

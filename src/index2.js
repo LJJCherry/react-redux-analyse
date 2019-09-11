@@ -1,21 +1,25 @@
-// use react-redux hooks
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import { createStore } from 'redux'
-import { Provider, connect, useSelector, useDispatch} from './react-redux-7.1.1/index'
+import { Provider, connect } from './react-redux-7.1.1/index'
 
 // React component
-const Counter = () => {
-    const value = useSelector(state => state.count);
-    const dispatch = useDispatch();
-
+class Counter extends Component {
+  render() {
+    const { value, onIncreaseClick } = this.props
     return (
       <div>
         <span>{value}</span>
-        <button onClick={() => dispatch(increaseAction)}>Increase</button>
+        <button onClick={onIncreaseClick}>Increase</button>
       </div>
     )
+  }
+}
+
+Counter.propTypes = {
+  value: PropTypes.number.isRequired,
+  onIncreaseClick: PropTypes.func.isRequired
 }
 
 // Action
@@ -34,8 +38,26 @@ function counter(state = { count: 0 }, action) {
 
 // Store
 const store = createStore(counter)
+
+// Map Redux state to component props
+function mapStateToProps(state) {
+  return {
+    value: state.count
+  }
+}
+
+// Map Redux actions to component props
+function mapDispatchToProps(dispatch) {
+  return {
+    onIncreaseClick: () => dispatch(increaseAction)
+  }
+}
+
 // Connected Component
-const App = Counter;
+const App = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Counter)
 
 
 ReactDOM.render(

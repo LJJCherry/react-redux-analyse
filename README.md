@@ -406,11 +406,6 @@ export default function connectAdvanced(
 connectAdvanced 是一个高阶组件，将 selectorFactory 计算得出的 props 和组件原有的 props 一起传给 WrappedComponent；
 hoist-non-react-statics 这个库，作用是避免在使用 HOC 时，导致类的 static 方法丢失的问题。详情见[react doc](https://reactjs.org/docs/higher-order-components.html#static-methods-must-be-copied-over)
 
-### 小结
-
-本文示例代码：
-分享一下本人读源码的小技巧，在本地用 create-react-app 新建一下小 demo 项目，然后将你想要解读的源码版本 down 在项目的 src 目录下，将 react-redux 的引入改成我们 down 下来的版本，都是没有编译压缩的代码，这样就可以随心所欲的打印 log，断点调试了~大家有什么技巧和经验欢迎在下面留言给我~
-
 ### 参考资料：
 
 1、[参考资料](https://juejin.im/post/5b8b5a60e51d4538c411ff12)

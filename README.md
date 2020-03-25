@@ -16,6 +16,7 @@ react-redux 主要就是完成了这两件事情
 #### Provider
 
 ![undefined](./src/assets/code1.png)
+
 Provider： 接收从 redux 而来的 store，以供子组件使用,同时在 Provider 组件中注册了 store 的监听，核心就是调用`store.subscribe`。
 
 #### connect

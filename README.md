@@ -6,7 +6,7 @@
 
 ### react-redux 应用结构：
 
-![undefined](https://intranetproxy.alipay.com/skylark/lark/0/2019/png/105555/1566013342127-6c2b4824-2e46-4773-a273-1fbb7b522aa0.png)
+![react-redux 应用结构]('./src/assets/react-redux.png')
 react-redux 主要就是完成了这两件事情
 第一，提供 Provider 组件通过 context 方式向应用注入 store，使子节点可以获取到 state。
 第二，使用 connect 高阶方法，获取并监听 store，然后根据 store state 和组件自身 props 计算得到新 props，注入该组件，并且可以通过监听 store，比较计算出的新 props 判断是否需要更新组件

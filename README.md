@@ -30,7 +30,8 @@ function connect(mapStateToProps?, mapDispatchToProps?, mergeProps?, options?)`
 
 `mapStateToProps?: (state, ownProps?) => Object` 正常我们用到的都是第一个参数，当 store 变化的时候，会被调用，第二个参数是组件的 props，如果添加了第二个参数，除了 store 变化的时候调用，每次父组件传入的 props 变化的时候也会被调用。
 `mergeProps?: (stateProps, dispatchProps, ownProps) => Object` : 如果指定了这个参数，mapStateToProps() 与 mapDispatchToProps() 的执行结果和组件自身的 props 将传入到这个回调函数中。该回调函数返回的对象将作为 props 传递到被包装的组件中
-** Connect 的源码**
+
+**Connect 的源码**
 
 ```
 export function createConnect({
